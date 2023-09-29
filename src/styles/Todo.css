@@ -1,0 +1,56 @@
+* {
+  color: white;
+  --primary: rgba(174, 174, 247, 0.097);
+}
+.mainTodoContainer {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(
+    112.1deg,
+    rgb(32, 38, 57) 11.4%,
+    rgb(63, 76, 119) 70.2%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  height: 7vh;
+  width: 100%;
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: 0.5s all;
+}
+header:hover {
+  opacity: 0.8;
+  box-shadow: 0 0 3px white;
+}
+
+header img {
+  height: 50px;
+  border-radius: 50%;
+}
+
+.tasksAdder {
+  margin-top: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tasksAdder input {
+  background-color: black;
+  text-align: center;
+  padding: 10px 20px;
+  margin: 5px;
+  transition: all 0.5s;
+}
+
+.tasksAdder input:hover {
+  box-shadow: 0 0 4px white;
+  border-radius: 15px;
+}
