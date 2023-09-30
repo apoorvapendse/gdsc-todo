@@ -25,7 +25,7 @@ const firestore = getFirestore(app);
 
 const Todo = ({ user }: PropType): JSX.Element => {
     const [currentUser, setCurrentUser] = useState<DocumentReference<DocumentData, DocumentData> | QueryDocumentSnapshot<DocumentData, DocumentData>>();
-
+    const [tasks, setTasks] = useState<QueryDocumentSnapshot<DocumentData, DocumentData>[]>();
 
     //useEffect to createNewUser in firestore if he is already not present
     useEffect(() => {
@@ -62,10 +62,14 @@ const Todo = ({ user }: PropType): JSX.Element => {
         const TasksRef = collection(firestore, `Users/${currID}/Tasks`);
         const TaskDocs = await getDocs(TasksRef);
         const tasks = TaskDocs.docs;
+
+        const prevTasks: QueryDocumentSnapshot<DocumentData, DocumentData>[] = []
         tasks.forEach((item) => {
-            console.log(item.data())
+            prevTasks.push(item)
         })
 
+        setTasks(prevTasks)
+        console.log(tasks)
     }
 
     const taskSubmitHandler = async (e: FormEvent) => {
@@ -128,7 +132,9 @@ const Todo = ({ user }: PropType): JSX.Element => {
 
             <main className='tasksContainer'>
                 {/* Display tasks here */}
-                <Task />
+                {tasks && tasks.map((item) =>
+                    <Task task={item} />
+                )}
             </main>
         </div>
     )

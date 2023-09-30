@@ -48,10 +48,12 @@ header img {
   padding: 10px 20px;
   margin: 5px;
   transition: all 0.5s;
+  box-shadow: 1px 1px 1px white;
 }
-
+header {
+  box-shadow: 1px 1px 4px white;
+}
 .tasksAdder input:hover {
-  box-shadow: 0 0 4px white;
   border-radius: 15px;
 }
 .tasksAdder button {

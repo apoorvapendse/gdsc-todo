@@ -1,9 +1,18 @@
 import '../styles/Task.css'
-const Task = () => {
+import { QueryDocumentSnapshot, DocumentData } from 'firebase/firestore';
+
+type TaskType = {
+    task: QueryDocumentSnapshot<DocumentData, DocumentData>
+}
+
+const Task = ({ task }: TaskType) => {
+
+    let { name, priority } = task.data();
     return (
         <div className="task-body">
             <div className="task-name">
-                <p>Go to sleep</p>
+                <p>{name}</p>
+                <p>P{priority}</p>
             </div>
             <div className="task-options">
                 <p>Mark As Done</p>
