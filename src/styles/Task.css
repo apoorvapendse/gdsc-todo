@@ -1,0 +1,14 @@
+.task-body {
+  margin: 12px;
+  width: 40vw;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.514);
+  align-items: center;
+  padding: 15px;
+}
+.task-options {
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+}
