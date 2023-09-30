@@ -12,6 +12,7 @@ interface PropType {
 interface Task {
     name: String;
     priority: number;
+    state: "Complete" | "Incomplete"
 
 }
 
@@ -24,8 +25,6 @@ const firestore = getFirestore(app);
 
 const Todo = ({ user }: PropType): JSX.Element => {
     const [currentUser, setCurrentUser] = useState<DocumentReference<DocumentData, DocumentData> | QueryDocumentSnapshot<DocumentData, DocumentData>>();
-
-
 
 
     //useEffect to createNewUser in firestore if he is already not present
@@ -51,7 +50,12 @@ const Todo = ({ user }: PropType): JSX.Element => {
             }
         }
         checkUser()
+
     }, [])
+    useEffect(() => {
+        if (currentUser)
+            updateTasks(currentUser.id)
+    }, [currentUser])
 
 
     const updateTasks = async (currID: string) => {
@@ -83,6 +87,7 @@ const Todo = ({ user }: PropType): JSX.Element => {
         const task: Task = {
             name: taskName as string,
             priority: taskPriority != undefined ? +taskPriority : 1,
+            state: "Incomplete"
         }
 
         const newTask = await addDoc(userReference, task);
