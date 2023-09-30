@@ -78,7 +78,7 @@ const Todo = ({ user }: PropType): JSX.Element => {
                 Enter your task
                 <input type="text" placeholder='task name' ref={taskNameRef} />
                 <input type="number" placeholder='task priority' ref={taskPriorityRef} />
-                <button type='submit'></button>
+                <button type='submit'>Add Task</button>
             </form>
 
             <main className='tasksContainer'>

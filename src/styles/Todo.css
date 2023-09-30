@@ -54,3 +54,11 @@ header img {
   box-shadow: 0 0 4px white;
   border-radius: 15px;
 }
+.tasksAdder button {
+  color: black !important;
+  padding: 6px;
+}
+.tasksAdder button:hover {
+  scale: 1;
+  background-color: greenyellow;
+}
