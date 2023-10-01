@@ -26,6 +26,7 @@ const firestore = getFirestore(app);
 const Todo = ({ user }: PropType): JSX.Element => {
     const [currentUser, setCurrentUser] = useState<DocumentReference<DocumentData, DocumentData> | QueryDocumentSnapshot<DocumentData, DocumentData>>();
     const [tasks, setTasks] = useState<QueryDocumentSnapshot<DocumentData, DocumentData>[]>();
+    const [rerender, setRerender] = useState<boolean>(false);
 
     //useEffect to createNewUser in firestore if he is already not present
     useEffect(() => {
@@ -55,7 +56,7 @@ const Todo = ({ user }: PropType): JSX.Element => {
     useEffect(() => {
         if (currentUser)
             updateTasks(currentUser.id)
-    }, [currentUser])
+    }, [currentUser, rerender])
 
 
     const updateTasks = async (currID: string) => {
@@ -133,7 +134,7 @@ const Todo = ({ user }: PropType): JSX.Element => {
             <main className='tasksContainer'>
                 {/* Display tasks here */}
                 {tasks && tasks.map((item) =>
-                    <Task task={item} />
+                    <Task task={item} userID={currentUser?.id} setRerender={setRerender} rerender={rerender} />
                 )}
             </main>
         </div>
