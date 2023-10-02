@@ -69,6 +69,9 @@ const Todo = ({ user }: PropType): JSX.Element => {
             prevTasks.push(item)
         })
 
+        prevTasks.sort((a, b) => a.data().priority - b.data().priority)
+
+
         setTasks(prevTasks)
         console.log(tasks)
     }
