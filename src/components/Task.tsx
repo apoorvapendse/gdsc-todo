@@ -70,15 +70,15 @@ const Task = ({ task, userID, setRerender, rerender }: TaskType) => {
     return (
         <div className="task-body">
             <div className="task-name" >
-                {state == "Incomplete" && <p>{name}</p>}
+                {state == "Incomplete" && <p><b>{name}</b></p>}
                 {state == "Complete" && <p style={{ textDecoration: "line-through" }}>{name}</p>}
                 <p>P{priority}</p>
             </div>
             <div className="task-options">
-                {state == "Incomplete" && <p onClick={ToggleComplete}>Mark As Done</p>}
+                {state == "Incomplete" && <img onClick={ToggleComplete} src='https://cdn.pixabay.com/photo/2016/03/31/14/37/check-mark-1292787_640.png' style={{ width: "20px" }} />}
                 {state == "Complete" && <p onClick={ToggleComplete}>Mark As Not Done</p>}
-                <p onClick={deleteTask}>Delete Task</p>
-                <p onClick={editTask}>Edit Task</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/3687/3687412.png" style={{ width: "25px" }} onClick={deleteTask} />
+                <img onClick={editTask} style={{ width: "25px", backgroundColor: "white" }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Edit_icon_%28the_Noun_Project_30184%29.svg/1024px-Edit_icon_%28the_Noun_Project_30184%29.svg.png" />
             </div>
 
         </div>

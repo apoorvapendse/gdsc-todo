@@ -1,7 +1,7 @@
 import { User } from 'firebase/auth'
 import '../styles/Todo.css'
 import { FormEvent, useEffect, useRef, useState } from 'react'
-import { DocumentData, QueryDocumentSnapshot, addDoc, collection, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore'
+import { DocumentData, QueryDocumentSnapshot, addDoc, collection, getDocs, getFirestore, query, where } from 'firebase/firestore'
 import { app } from '../firebase'
 import Task from './Task'
 import { DocumentReference } from 'firebase/firestore/lite'
@@ -119,7 +119,7 @@ const Todo = ({ user }: PropType): JSX.Element => {
     const taskNameRef = useRef<HTMLInputElement>(null);
     const taskPriorityRef = useRef<HTMLInputElement>(null);
     if (isPomoDoro) {
-        return <PomoDoro />
+        return <PomoDoro user={user} />
     }
 
     return (
@@ -128,7 +128,10 @@ const Todo = ({ user }: PropType): JSX.Element => {
                 <h3>Welcome {user.displayName}</h3>
                 {
                     user.photoURL && <div style={{ display: "flex", justifyContent: "center" }}>
-                        <button style={{ padding: "3px" }} onClick={() => setIsPomoDoro(true)}>Pomodoro</button>
+                        <button style={{ padding: "3px" }} onClick={() => {
+
+                            setIsPomoDoro(true)
+                        }}>Pomodoro</button>
                         <img src={user.photoURL} alt="" />
                     </div>
                 }

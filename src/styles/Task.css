@@ -7,8 +7,18 @@
   align-items: center;
   padding: 15px;
 }
+
 .task-options {
   display: flex;
   gap: 12px;
   cursor: pointer;
+}
+@media only screen and (max-width: 600px) {
+  .task-body {
+    flex-direction: column;
+  }
+  .task-options {
+    flex-direction: column;
+    justify-content: center;
+  }
 }
