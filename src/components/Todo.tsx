@@ -5,6 +5,7 @@ import { DocumentData, QueryDocumentSnapshot, addDoc, collection, getDoc, getDoc
 import { app } from '../firebase'
 import Task from './Task'
 import { DocumentReference } from 'firebase/firestore/lite'
+import PomoDoro from './PomoDoro'
 
 interface PropType {
     user: User
@@ -27,6 +28,7 @@ const Todo = ({ user }: PropType): JSX.Element => {
     const [currentUser, setCurrentUser] = useState<DocumentReference<DocumentData, DocumentData> | QueryDocumentSnapshot<DocumentData, DocumentData>>();
     const [tasks, setTasks] = useState<QueryDocumentSnapshot<DocumentData, DocumentData>[]>();
     const [rerender, setRerender] = useState<boolean>(false);
+    const [isPomoDoro, setIsPomoDoro] = useState<boolean>(false);
 
     //useEffect to createNewUser in firestore if he is already not present
     useEffect(() => {
@@ -116,16 +118,24 @@ const Todo = ({ user }: PropType): JSX.Element => {
 
     const taskNameRef = useRef<HTMLInputElement>(null);
     const taskPriorityRef = useRef<HTMLInputElement>(null);
+    if (isPomoDoro) {
+        return <PomoDoro />
+    }
 
     return (
         <div className="mainTodoContainer">
             <header>
                 <h3>Welcome {user.displayName}</h3>
                 {
-                    user.photoURL &&
-                    <img src={user.photoURL} alt="" />
+                    user.photoURL && <div style={{ display: "flex", justifyContent: "center" }}>
+                        <button style={{ padding: "3px" }} onClick={() => setIsPomoDoro(true)}>Pomodoro</button>
+                        <img src={user.photoURL} alt="" />
+                    </div>
                 }
             </header>
+
+
+
 
             <form className='tasksAdder' onSubmit={taskSubmitHandler} >
                 Enter your task
