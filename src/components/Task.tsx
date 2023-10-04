@@ -23,7 +23,7 @@ const Task = ({ task, userID, setRerender, rerender }: TaskType) => {
 
             const TaskReference = doc(firestore, `Users/${userID}/Tasks/${task.id}`)
             const taskSnapshot = await getDoc(TaskReference);
-            const editedTask = await setDoc(TaskReference, {
+            await setDoc(TaskReference, {
                 ...taskSnapshot.data(),
                 name: newname,
                 priority: newpriority,
@@ -42,7 +42,7 @@ const Task = ({ task, userID, setRerender, rerender }: TaskType) => {
         try {
 
             const TaskReference = doc(firestore, `Users/${userID}/Tasks/${task.id}`)
-            const taskSnapshot = await deleteDoc(TaskReference);
+            await deleteDoc(TaskReference);
             setRerender(!rerender)
         } catch (error) {
             console.log(error)
@@ -54,7 +54,7 @@ const Task = ({ task, userID, setRerender, rerender }: TaskType) => {
         try {
 
             const taskSnapshot = await getDoc(TaskReference);
-            const toggledTaskState = taskSnapshot?.data()?.state == "Incomplete" ? await setDoc(TaskReference, {
+            taskSnapshot?.data()?.state == "Incomplete" ? await setDoc(TaskReference, {
                 ...taskSnapshot.data(), state: "Complete"
             }) : await setDoc(TaskReference, {
                 ...taskSnapshot.data(), state: "Incomplete"
